@@ -15,6 +15,7 @@ var img2 = "img/special2.png";
 var titleSound = "sounds/duh.mp3";
 var ip = codehelper_ip.IP; //".0123456789"
 var ext = ".mp3";
+var takes = 3; // There are 3 takes for each audio clip.
 
 // Instance Vars
 var sounds = new Array();
@@ -26,7 +27,7 @@ for (var i = 0; i <= 9; i++)
 {
 	// Nested array for random sounds 1 - 3
 	sounds[i.toString()] = new Array(); 
-	for (var j = 1; j <= 3; j++) // Add random sounds 1 - 3 for this digit
+	for (var j = 1; j <= takes; j++) // Add random sounds 1 - 3 for this digit
 	{
 		sounds[i.toString()][j] = new Audio("sounds/" + i + "-" + j + ext);
 	}	
@@ -37,7 +38,7 @@ sounds['.'] = new Array();
 sounds['starting'] = new Array();
 sounds['ending'] = new Array();
 
-for (var i = 1; i <= 3; i++)
+for (var i = 1; i <= takes; i++)
 {
 	sounds['.'][i] = new Audio("sounds/" + "dot-" + i + ext);
 	sounds['starting'][i] = new Audio("sounds/" + "starting-" + i + ext);
@@ -55,7 +56,7 @@ function playIP(i)
 		return;
 	
 	// Randomly selected sound file number.
-	var rand = Math.floor(Math.random() * 3) + 1;
+	var rand = Math.floor(Math.random() * takes) + 1;
 	
 	if (i == -1) // If we are starting from the beginning, play start sound.
 		curSound = sounds['starting'][rand];
