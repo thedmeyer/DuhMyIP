@@ -12,8 +12,9 @@ is included above this file.
 // Config Vars
 var img1 = "img/special.png";
 var img2 = "img/special2.png";
-var titleSound = "sounds/duh.wav";
+var titleSound = "sounds/duh.mp3";
 var ip = codehelper_ip.IP; //".0123456789"
+var ext = ".mp3";
 
 // Instance Vars
 var sounds = new Array();
@@ -27,7 +28,7 @@ for (var i = 0; i <= 9; i++)
 	sounds[i.toString()] = new Array(); 
 	for (var j = 1; j <= 3; j++) // Add random sounds 1 - 3 for this digit
 	{
-		sounds[i.toString()][j] = new Audio("sounds/" + i + "-" + j + ".wav");
+		sounds[i.toString()][j] = new Audio("sounds/" + i + "-" + j + ext);
 	}	
 }
 
@@ -38,9 +39,9 @@ sounds['ending'] = new Array();
 
 for (var i = 1; i <= 3; i++)
 {
-	sounds['.'][i] = new Audio("sounds/" + "dot-" + i + ".wav");
-	sounds['starting'][i] = new Audio("sounds/" + "starting-" + i + ".wav");
-	sounds['ending'][i] = new Audio("sounds/" + "ending-" + i + ".wav");
+	sounds['.'][i] = new Audio("sounds/" + "dot-" + i + ext);
+	sounds['starting'][i] = new Audio("sounds/" + "starting-" + i + ext);
+	sounds['ending'][i] = new Audio("sounds/" + "ending-" + i + ext);
 }
 
 
