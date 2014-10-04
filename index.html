@@ -28,19 +28,38 @@
 </head>
 
 <body>
+	<!-- facebook like button -->
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=386045904774071&version=v2.0";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
+	<!-- end facebook like button -->
+	
     <div class="container">
       <!-- fork ribbon -->
       <a href="https://github.com/thedmeyer/DuhMyIP" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
       <div class="jumbotron" style="padding: 1px;">
+      	
       	<h1 onclick='playTitleSound();'>Duh My IP!</h1>
       	<p></p>
       	<img id="awesome" src="img/special.png" length="50%" width="50%"><p></p>
         <h1><font size="6">Your IP is:</font> <script type="text/javascript">document.write(ip);</script></h1>
         <p class="lead">Just click the button below to hear your IP address in the most dumb way possible. I promise, it will be stupid...</p>
         <p><a class="btn btn-lg btn-success" href="#" role="button" onclick='onButtonClick();'>Duh My IP</a></p>
+        
+      	<!-- fb button -->
+      	<div style="vertical-align: text-bottom !important;" class="fb-like" data-href="http://thedmeyer.github.io/DuhMyIP/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+	  	<!-- twitter button -->
+	  	<a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="duhmyip">Tweet</a>
+	  	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       </div>
-
+      
       <div class="row marketing">
         <div class="col-lg-6">
           <h4>Special Thanks</h4>
