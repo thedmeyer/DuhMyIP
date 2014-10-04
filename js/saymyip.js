@@ -12,6 +12,7 @@ is included above this file.
 // Config Vars
 var img1 = "img/special.png";
 var img2 = "img/special2.png";
+var imgElement = "awesome"; // The element id for the title image.
 var titleSound = "sounds/duh.mp3";
 var ip = codehelper_ip.IP; //".0123456789"
 var ext = ".mp3";
@@ -82,7 +83,7 @@ function playIP(i)
 */
 function switchImg(playing)
 {
-	document.getElementById("awesome").src = (playing) ? img2 : img1;
+	document.getElementById(imgElement).src = (playing) ? img2 : img1;
 }
 
 /*
