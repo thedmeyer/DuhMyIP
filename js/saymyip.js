@@ -15,13 +15,15 @@ var img2 = "img/special2.png";
 var imgElement = "awesome"; // The element id for the title image.
 var titleSound = "sounds/duh.mp3";
 var ip = codehelper_ip.IP; //".0123456789"
+var dir = "sounds/"; // The directory of all the audio clips.
 var ext = ".mp3";
 var takes = 3; // There are 3 takes for each audio clip.
 
 // Instance Vars
 var sounds = new Array();
 var curSound = null;
-
+var START_POINT = -1;
+var END_POINT = ip.length;
 
 // Set up sounds 0 - 9
 for (var i = 0; i <= 9; i++)
@@ -30,7 +32,7 @@ for (var i = 0; i <= 9; i++)
 	sounds[i.toString()] = new Array(); 
 	for (var j = 1; j <= takes; j++) // Add random sounds 1 - 3 for this digit
 	{
-		sounds[i.toString()][j] = new Audio("sounds/" + i + "-" + j + ext);
+		sounds[i.toString()][j] = new Audio(dir + i + "-" + j + ext);
 	}	
 }
 
@@ -41,9 +43,9 @@ sounds['ending'] = new Array();
 
 for (var i = 1; i <= takes; i++)
 {
-	sounds['.'][i] = new Audio("sounds/" + "dot-" + i + ext);
-	sounds['starting'][i] = new Audio("sounds/" + "starting-" + i + ext);
-	sounds['ending'][i] = new Audio("sounds/" + "ending-" + i + ext);
+	sounds['.'][i] = new Audio(dir + "dot-" + i + ext);
+	sounds['starting'][i] = new Audio(dir + "starting-" + i + ext);
+	sounds['ending'][i] = new Audio(dir + "ending-" + i + ext);
 }
 
 
@@ -53,15 +55,15 @@ for (var i = 1; i <= takes; i++)
 function playIP(i)
 {	
 	// If past all the chars in IP, we're done.
-	if (i > ip.length)
+	if (i > END_POINT)
 		return;
 	
 	// Randomly selected sound file number.
 	var rand = Math.floor(Math.random() * takes) + 1;
 	
-	if (i == -1) // If we are starting from the beginning, play start sound.
+	if (i == START_POINT) // If we are starting from the beginning, play start sound.
 		curSound = sounds['starting'][rand];
-	else if (i == ip.length) // We're now at the end.
+	else if (i == END_POINT) // We're now at the end.
 	{
 		curSound = sounds['ending'][rand];
 		switchImg(false);
@@ -122,5 +124,5 @@ function onButtonClick()
 	switchImg(true);
 	
 	// Play the IP sound!
-	playIP(-1);
+	playIP(START_POINT);
 }
