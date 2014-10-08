@@ -4,9 +4,9 @@
 */
 
 /* 
-This won't run unless 
-http://www.codehelper.io/api/ips/?js
-is included above this file.
+This won't properly run unless 
+http://api.ipify.org?format=jsonp&callback=defineIP
+is called AFTER this file.
 */
 
 // Config Vars
@@ -14,7 +14,7 @@ var img1 = "img/special.png";
 var img2 = "img/special2.png";
 var imgElement = "awesome"; // The element id for the title image.
 var titleSound = "sounds/duh.mp3";
-var ip = codehelper_ip.IP; //".0123456789"
+var ip = ""; //".0123456789"
 var dir = "sounds/"; // The directory of all the audio clips.
 var ext = ".mp3";
 var takes = 3; // There are 3 takes for each audio clip.
@@ -23,7 +23,17 @@ var takes = 3; // There are 3 takes for each audio clip.
 var sounds = new Array();
 var curSound = null;
 var START_POINT = -1;
+
+// IP dependent vars
+var ip = "";
 var END_POINT = ip.length;
+
+// Define the IP address.
+function defineIP(json)
+{
+	ip = json.ip; //".0123456789"
+	END_POINT = ip.length;
+}
 
 // Set up sounds 0 - 9
 for (var i = 0; i <= 9; i++)
