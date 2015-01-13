@@ -5,7 +5,7 @@
 
 /* 
 This won't run unless 
-"https://api.ipify.org/?format=jsonp&callback=var%20callback_ip="
+http://www.codehelper.io/api/ips/?js
 is included above this file.
 */
 
@@ -14,11 +14,15 @@ var img1 = "img/special.png";
 var img2 = "img/special2.png";
 var imgElement = "awesome"; // The element id for the title image.
 var titleSound = "sounds/duh.mp3";
+var ip = codehelper_ip.IP; //".0123456789"
 var dir = "sounds/"; // The directory of all the audio clips.
 var ext = ".mp3";
 var takes = 3; // There are 3 takes for each audio clip.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> FETCH_HEAD
 // Instance Vars
 var ip = ""; 
 var sounds = new Array();
