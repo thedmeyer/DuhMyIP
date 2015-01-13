@@ -1,12 +1,6 @@
 /*
 * Created by ManeBit.
-* Copyright 2014.
-*/
-
-/* 
-This won't run unless 
-http://www.codehelper.io/api/ips/?js
-is included above this file.
+* Copyright 2014 - 2015
 */
 
 // Config Vars
@@ -20,34 +14,44 @@ var ext = ".mp3";
 var takes = 3; // There are 3 takes for each audio clip.
 
 // Instance Vars
+var ip = ""; 
 var sounds = new Array();
 var curSound = null;
 var START_POINT = -1;
-var END_POINT = ip.length;
+var END_POINT = -1;
 
-// Set up sounds 0 - 9
-for (var i = 0; i <= 9; i++)
+/*
+* The main init function, called upon ip retrieval 
+*/
+function main(json)
 {
-	// Nested array for random sounds 1 - 3
-	sounds[i.toString()] = new Array(); 
-	for (var j = 1; j <= takes; j++) // Add random sounds 1 - 3 for this digit
+	// Getting the IP
+	ip = json.ip; //".0123456789"
+	END_POINT = ip.length;
+	
+	// Set up sounds 0 - 9
+	for (var i = 0; i <= 9; i++)
 	{
-		sounds[i.toString()][j] = new Audio(dir + i + "-" + j + ext);
-	}	
+		// Nested array for random sounds 1 - 3
+		sounds[i.toString()] = new Array(); 
+		for (var j = 1; j <= takes; j++) // Add random sounds 1 - 3 for this digit
+		{
+			sounds[i.toString()][j] = new Audio(dir + i + "-" + j + ext);
+		}	
+	}
+	
+	// Set up special char sounds
+	sounds['.'] = new Array();
+	sounds['starting'] = new Array();
+	sounds['ending'] = new Array();
+
+	for (var i = 1; i <= takes; i++)
+	{
+		sounds['.'][i] = new Audio(dir + "dot-" + i + ext);
+		sounds['starting'][i] = new Audio(dir + "starting-" + i + ext);
+		sounds['ending'][i] = new Audio(dir + "ending-" + i + ext);
+	}
 }
-
-// Set up special char sounds
-sounds['.'] = new Array();
-sounds['starting'] = new Array();
-sounds['ending'] = new Array();
-
-for (var i = 1; i <= takes; i++)
-{
-	sounds['.'][i] = new Audio(dir + "dot-" + i + ext);
-	sounds['starting'][i] = new Audio(dir + "starting-" + i + ext);
-	sounds['ending'][i] = new Audio(dir + "ending-" + i + ext);
-}
-
 
 /*
 * This function increments through the IP and plays the random associated sounds.
