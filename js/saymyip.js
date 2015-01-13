@@ -8,7 +8,6 @@ var img1 = "img/special.png";
 var img2 = "img/special2.png";
 var imgElement = "awesome"; // The element id for the title image.
 var titleSound = "sounds/duh.mp3";
-var ip = codehelper_ip.IP; //".0123456789"
 var dir = "sounds/"; // The directory of all the audio clips.
 var ext = ".mp3";
 var takes = 3; // There are 3 takes for each audio clip.
