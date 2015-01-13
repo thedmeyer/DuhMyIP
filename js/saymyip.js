@@ -1,12 +1,6 @@
 /*
 * Created by thedmeyer.
-* Copyright 2014.
-*/
-
-/* 
-This won't run unless 
-http://www.codehelper.io/api/ips/?js
-is included above this file.
+* Copyright 2014 - 2015
 */
 
 // Config Vars
@@ -19,10 +13,6 @@ var dir = "sounds/"; // The directory of all the audio clips.
 var ext = ".mp3";
 var takes = 3; // There are 3 takes for each audio clip.
 
-<<<<<<< HEAD
-
-=======
->>>>>>> FETCH_HEAD
 // Instance Vars
 var ip = ""; 
 var sounds = new Array();
