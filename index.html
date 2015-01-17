@@ -43,6 +43,16 @@
 
 <body>
 
+    <script>
+        // overriding real ip with parameter in url
+        ipstart = (location.href.indexOf("ip="));
+        if(ipstart != -1) { // parameter "ip" is present
+            ipend = (location.href.indexOf("&", ipstart+3));
+            if (ipend == -1) ipend = (location.href.indexOf("#", ipstart+3));
+            if (ipend == -1) ipend = location.href.length;
+            ip = location.href.substring(ipstart+3,ipend);
+        }
+    </script>
 	<!-- facebook like button -->
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
