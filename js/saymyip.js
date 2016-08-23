@@ -1,5 +1,5 @@
 /*
-* Created by ManeBit.
+* Created by David Meyer.
 * Copyright 2014 - 2015
 */
 
