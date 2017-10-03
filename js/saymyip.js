@@ -7,6 +7,7 @@
 var img1 = "img/special.png";
 var img2 = "img/special2.png";
 var imgElement = "awesome"; // The element id for the title image.
+var audioElement = "playitagain";
 var titleSound = "sounds/duh.mp3";
 var dir = "sounds/"; // The directory of all the audio clips.
 var ext = ".mp3";
@@ -35,7 +36,7 @@ function main(json)
 		sounds[i.toString()] = new Array(); 
 		for (var j = 1; j <= takes; j++) // Add random sounds 1 - 3 for this digit
 		{
-			sounds[i.toString()][j] = new Audio(dir + i + "-" + j + ext);
+			sounds[i.toString()][j] = dir + i + "-" + j + ext;
 		}	
 	}
 	
@@ -46,10 +47,20 @@ function main(json)
 
 	for (var i = 1; i <= takes; i++)
 	{
-		sounds['.'][i] = new Audio(dir + "dot-" + i + ext);
-		sounds['starting'][i] = new Audio(dir + "starting-" + i + ext);
-		sounds['ending'][i] = new Audio(dir + "ending-" + i + ext);
+		sounds['.'][i] = dir + "dot-" + i + ext;
+		sounds['starting'][i] = dir + "starting-" + i + ext;
+		sounds['ending'][i] = dir + "ending-" + i + ext;
 	}
+}
+
+function playAudio(src, onend)
+{
+	var audio = document.getElementById(audioElement);
+	audio.src = src;
+	audio.play();
+	audio.onended = function() {
+		onend();
+	};
 }
 
 /*
@@ -74,13 +85,7 @@ function playIP(i)
 	else // Else we're just strolling through the middle of the IP.
 		curSound = sounds[ip.charAt(i)][rand];
 	
-	// Play the current character!
-	curSound.play();
-	
-	// Now we wait. Don't play the next sound until the current one is finished.
-	curSound.onended = function() {
-    	playIP(++i);
-	};
+	playAudio(curSound, playIP.bind(null, i+1));
 }
 
 /*
@@ -102,17 +107,7 @@ function playTitleSound()
 		
 	switchImg(true);
 	
-	// Create temp var to hold the sound.
-	var title = new Audio(titleSound);
-	
-	// Play the sound.
-	title.play();
-	
-	// Wait until the sound is done then switch the image back.
-	title.onended = function() {
-    	switchImg(false);
-	};
-	
+	playAudio(titleSound, switchImg.bind(null, false));
 }
 
 /*
