@@ -80,20 +80,19 @@ function playAudio(src, onend) {
 */
 function playIP(i) {
     // If past all the chars in IP, we're done.
-    if (i > END_POINT)
-        return;
+    if (i > END_POINT) return;
     
     // Randomly selected sound file number.
     var rand = Math.floor(Math.random() * takes) + 1;
     
-    if (i == START_POINT) // If we are starting from the beginning, play start sound.
+    if (i == START_POINT) { // If we are starting from the beginning, play start sound.
         curSound = sounds['starting'][rand];
-    else if (i == END_POINT) { // We're now at the end.
+    } else if (i == END_POINT) { // We're now at the end.
         curSound = sounds['ending'][rand];
         switchImg(false);
-    }
-    else // Else we're just strolling through the middle of the IP.
+    } else { // Else we're just strolling through the middle of the IP.
         curSound = sounds[ip.charAt(i)][rand];
+    }
     
     playAudio(curSound, playIP.bind(null, i+1));
 }
@@ -110,8 +109,7 @@ function switchImg(playing) {
 */
 function playTitleSound() {
     // Is sound already playing? If so, get out of here!
-    if(curSound != null && !curSound.ended)
-        return;
+    if (curSound != null && !curSound.ended) return;
         
     switchImg(true);
     
@@ -123,8 +121,7 @@ function playTitleSound() {
 */
 function onButtonClick() {
     // Is sound already playing? If so, get out of here!
-    if(curSound != null && !curSound.ended)
-        return;
+    if (curSound != null && !curSound.ended) return;
     
     switchImg(true);
     
