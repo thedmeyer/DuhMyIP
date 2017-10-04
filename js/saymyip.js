@@ -66,6 +66,10 @@ function main(json) {
     }
 }
 
+/*
+* Handles playing audio from specified source. 
+* Includes onend callback.
+*/
 function playAudio(src, onend) {
     var audio = document.getElementById(audioElement);
     audio.src = src;
@@ -111,18 +115,22 @@ function playTitleSound() {
     // Is sound already playing? If so, get out of here!
     if (curSound != null && !curSound.ended) return;
         
+    // Change title image to playing state.
     switchImg(true);
     
+    // Once sound completes, change title image to default state.
     playAudio(titleSound, switchImg.bind(null, false));
 }
 
 /*
-* Basically the main function. Defines itself.
+* Triggered by user action on click. 
+* Handles switching the title image and playing the IP.
 */
 function onButtonClick() {
     // Is sound already playing? If so, get out of here!
     if (curSound != null && !curSound.ended) return;
     
+    // Change title image to playing state.
     switchImg(true);
     
     // Play the IP sound!
