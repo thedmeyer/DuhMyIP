@@ -21,21 +21,21 @@ SOFTWARE.
 */
 
 // Config Vars
-var img1 = "img/special.png";
-var img2 = "img/special2.png";
-var imgElement = "awesome"; // The element id for the title image.
-var audioElement = "playitagain";
-var titleSound = "sounds/duh.mp3";
-var dir = "sounds/"; // The directory of all the audio clips.
-var ext = ".mp3";
-var takes = 3; // There are 3 takes for each audio clip.
+var img1            = "img/special.png";
+var img2            = "img/special2.png";
+var imgElement      = "awesome";        // The element id for the title image.
+var audioElement    = "playitagain";
+var titleSound      = "sounds/duh.mp3";
+var dir             = "sounds/";        // The directory of all the audio clips.
+var ext             = ".mp3";
+var takes           = 3;                // There are 3 takes for each audio clip.
 
 // Instance Vars
-var ip = ""; 
-var sounds = new Array();
-var curSound = null;
+var ip          = ""; 
+var sounds      = new Array();
+var curSound    = null;
 var START_POINT = -1;
-var END_POINT = -1;
+var END_POINT   = -1;
 
 /*
 * The main init function, called upon ip retrieval 
@@ -66,6 +66,10 @@ function main(json) {
     }
 }
 
+/*
+* Handles playing audio from specified source. 
+* Includes onend callback.
+*/
 function playAudio(src, onend) {
     var audio = document.getElementById(audioElement);
     audio.src = src;
@@ -78,24 +82,28 @@ function playAudio(src, onend) {
 /*
 * This function increments through the IP and plays the random associated sounds.
 */
-function playIP(i) {
+function playIP(i, onend) {
     // If past all the chars in IP, we're done.
-    if (i > END_POINT)
-        return;
+    if (i > END_POINT) return;
     
     // Randomly selected sound file number.
     var rand = Math.floor(Math.random() * takes) + 1;
-    
-    if (i == START_POINT) // If we are starting from the beginning, play start sound.
-        curSound = sounds['starting'][rand];
-    else if (i == END_POINT) { // We're now at the end.
-        curSound = sounds['ending'][rand];
-        switchImg(false);
+
+    // Determine current position in IP.
+    switch (i) {
+        case START_POINT:
+            curSound = sounds['starting'][rand];
+            break;
+        case END_POINT:
+            curSound = sounds['ending'][rand];
+            onend();
+            break;
+        default:
+            curSound = sounds[ip.charAt(i)][rand];
     }
-    else // Else we're just strolling through the middle of the IP.
-        curSound = sounds[ip.charAt(i)][rand];
     
-    playAudio(curSound, playIP.bind(null, i+1));
+    // Begin playing sounds. Iterate on complete.
+    playAudio(curSound, playIP.bind(null, i+1, onend));
 }
 
 /*
@@ -110,24 +118,26 @@ function switchImg(playing) {
 */
 function playTitleSound() {
     // Is sound already playing? If so, get out of here!
-    if(curSound != null && !curSound.ended)
-        return;
+    if (curSound != null && !curSound.ended) return;
         
+    // Change title image to playing state.
     switchImg(true);
     
+    // Play sound and change title image to default state on complete.
     playAudio(titleSound, switchImg.bind(null, false));
 }
 
 /*
-* Basically the main function. Defines itself.
+* Triggered by user action on click. 
+* Handles switching the title image and playing the IP.
 */
 function onButtonClick() {
     // Is sound already playing? If so, get out of here!
-    if(curSound != null && !curSound.ended)
-        return;
+    if (curSound != null && !curSound.ended) return;
     
+    // Change title image to playing state.
     switchImg(true);
     
-    // Play the IP sound!
-    playIP(START_POINT);
+    // Play the IP and change title image to default state on complete.
+    playIP(START_POINT, switchImg.bind(null, false));
 }
