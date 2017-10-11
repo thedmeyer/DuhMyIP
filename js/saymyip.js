@@ -21,35 +21,35 @@ SOFTWARE.
 */
 
 // Config Vars
-var img1            = "img/special.png";
-var img2            = "img/special2.png";
-var imgElement      = "awesome";        // The element id for the title image.
-var audioElement    = "playitagain";
-var titleSound      = "sounds/duh.mp3";
-var dir             = "sounds/";        // The directory of all the audio clips.
-var ext             = ".mp3";
-var takes           = 3;                // There are 3 takes for each audio clip.
+const img1            = "img/special.png";
+const img2            = "img/special2.png";
+const imgElement      = "awesome";        // The element id for the title image.
+const audioElement    = "playitagain";
+const titleSound      = "sounds/duh.mp3";
+const dir             = "sounds/";        // The directory of all the audio clips.
+const ext             = ".mp3";
+const takes           = 3;                // There are 3 takes for each audio clip.
 
 // Instance Vars
-var ip          = ""; 
-var sounds      = new Array();
-var curSound    = null;
-var START_POINT = -1;
-var END_POINT   = -1;
+let ip          = ""; 
+let sounds      = new Array();
+let curSound    = null;
+let START_POINT = -1;
+let END_POINT   = -1;
 
 /*
 * The main init function, called upon ip retrieval 
 */
-function main(json) {
+const main = (json)=> {
     // Getting the IP
     ip = json.ip; //".0123456789"
     END_POINT = ip.length;
     
     // Set up sounds 0 - 9
-    for (var i = 0; i <= 9; i++) {
+    for (let i = 0; i <= 9; i++) {
         // Nested array for random sounds 1 - 3
         sounds[i.toString()] = new Array(); 
-        for (var j = 1; j <= takes; j++) { // Add random sounds 1 - 3 for this digit
+        for (let j = 1; j <= takes; j++) { // Add random sounds 1 - 3 for this digit
             sounds[i.toString()][j] = dir + i + "-" + j + ext;
         }   
     }
@@ -59,7 +59,7 @@ function main(json) {
     sounds['starting'] = new Array();
     sounds['ending'] = new Array();
 
-    for (var i = 1; i <= takes; i++) {
+    for (let i = 1; i <= takes; i++) {
         sounds['.'][i] = dir + "dot-" + i + ext;
         sounds['starting'][i] = dir + "starting-" + i + ext;
         sounds['ending'][i] = dir + "ending-" + i + ext;
@@ -70,11 +70,11 @@ function main(json) {
 * Handles playing audio from specified source. 
 * Includes onend callback.
 */
-function playAudio(src, onend) {
-    var audio = document.getElementById(audioElement);
+const playAudio = (src, onend)=> {
+    let audio = document.getElementById(audioElement);
     audio.src = src;
     audio.play();
-    audio.onended = function() {
+    audio.onended = ()=> {
         onend();
     };
 }
@@ -82,12 +82,12 @@ function playAudio(src, onend) {
 /*
 * This function increments through the IP and plays the random associated sounds.
 */
-function playIP(i, onend) {
+const playIP = (i, onend)=> {
     // If past all the chars in IP, we're done.
     if (i > END_POINT) return;
     
     // Randomly selected sound file number.
-    var rand = Math.floor(Math.random() * takes) + 1;
+    let rand = Math.floor(Math.random() * takes) + 1;
 
     // Determine current position in IP.
     switch (i) {
@@ -109,14 +109,14 @@ function playIP(i, onend) {
 /*
 * Switches the two title images.
 */
-function switchImg(playing) {
+const switchImg = (playing)=> {
     document.getElementById(imgElement).src = (playing) ? img2 : img1;
 }
 
 /*
 * Plays the title sound of the page.
 */
-function playTitleSound() {
+const playTitleSound = ()=> {
     // Is sound already playing? If so, get out of here!
     if (curSound != null && !curSound.ended) return;
         
@@ -131,7 +131,7 @@ function playTitleSound() {
 * Triggered by user action on click. 
 * Handles switching the title image and playing the IP.
 */
-function onButtonClick() {
+const onButtonClick = ()=> {
     // Is sound already playing? If so, get out of here!
     if (curSound != null && !curSound.ended) return;
     
