@@ -40,7 +40,7 @@ let END_POINT   = -1;
 /*
 * The main init function, called upon ip retrieval 
 */
-let main = (json)=> {
+const main = (json)=> {
     // Getting the IP
     ip = json.ip; //".0123456789"
     END_POINT = ip.length;
@@ -70,7 +70,7 @@ let main = (json)=> {
 * Handles playing audio from specified source. 
 * Includes onend callback.
 */
-let playAudio = (src, onend)=> {
+const playAudio = (src, onend)=> {
     let audio = document.getElementById(audioElement);
     audio.src = src;
     audio.play();
@@ -82,7 +82,7 @@ let playAudio = (src, onend)=> {
 /*
 * This function increments through the IP and plays the random associated sounds.
 */
-let playIP = (i, onend)=> {
+const playIP = (i, onend)=> {
     // If past all the chars in IP, we're done.
     if (i > END_POINT) return;
     
@@ -109,14 +109,14 @@ let playIP = (i, onend)=> {
 /*
 * Switches the two title images.
 */
-let switchImg = (playing)=> {
+const switchImg = (playing)=> {
     document.getElementById(imgElement).src = (playing) ? img2 : img1;
 }
 
 /*
 * Plays the title sound of the page.
 */
-let playTitleSound = ()=> {
+const playTitleSound = ()=> {
     // Is sound already playing? If so, get out of here!
     if (curSound != null && !curSound.ended) return;
         
@@ -131,7 +131,7 @@ let playTitleSound = ()=> {
 * Triggered by user action on click. 
 * Handles switching the title image and playing the IP.
 */
-let onButtonClick = ()=> {
+const onButtonClick = ()=> {
     // Is sound already playing? If so, get out of here!
     if (curSound != null && !curSound.ended) return;
     
