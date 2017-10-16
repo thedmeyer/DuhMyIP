@@ -31,29 +31,29 @@ const ext             = ".mp3";
 const takes           = 3;                // There are 3 takes for each audio clip.
 
 // Instance Vars
-let ip          = ""; 
+let ip          = "";
 let sounds      = new Array();
 let curSound    = null;
 let START_POINT = -1;
 let END_POINT   = -1;
 
 /*
-* The main init function, called upon ip retrieval 
+* The main init function, called upon ip retrieval
 */
 const main = (json)=> {
     // Getting the IP
     ip = json.ip; //".0123456789"
     END_POINT = ip.length;
-    
+
     // Set up sounds 0 - 9
     for (let i = 0; i <= 9; i++) {
         // Nested array for random sounds 1 - 3
-        sounds[i.toString()] = new Array(); 
+        sounds[i.toString()] = new Array();
         for (let j = 1; j <= takes; j++) { // Add random sounds 1 - 3 for this digit
             sounds[i.toString()][j] = dir + i + "-" + j + ext;
-        }   
+        }
     }
-    
+
     // Set up special char sounds
     sounds['.'] = new Array();
     sounds['starting'] = new Array();
@@ -67,11 +67,11 @@ const main = (json)=> {
 }
 
 /*
-* Handles playing audio from specified source. 
+* Handles playing audio from specified source.
 * Includes onend callback.
 */
 const playAudio = (src, onend)=> {
-    let audio = document.getElementById(audioElement);
+    const audio = document.getElementById(audioElement);
     audio.src = src;
     audio.play();
     audio.onended = ()=> {
@@ -85,9 +85,9 @@ const playAudio = (src, onend)=> {
 const playIP = (i, onend)=> {
     // If past all the chars in IP, we're done.
     if (i > END_POINT) return;
-    
+
     // Randomly selected sound file number.
-    let rand = Math.floor(Math.random() * takes) + 1;
+    const rand = Math.floor(Math.random() * takes) + 1;
 
     // Determine current position in IP.
     switch (i) {
@@ -101,7 +101,7 @@ const playIP = (i, onend)=> {
         default:
             curSound = sounds[ip.charAt(i)][rand];
     }
-    
+
     // Begin playing sounds. Iterate on complete.
     playAudio(curSound, playIP.bind(null, i+1, onend));
 }
@@ -119,25 +119,25 @@ const switchImg = (playing)=> {
 const playTitleSound = ()=> {
     // Is sound already playing? If so, get out of here!
     if (curSound != null && !curSound.ended) return;
-        
+
     // Change title image to playing state.
     switchImg(true);
-    
+
     // Play sound and change title image to default state on complete.
     playAudio(titleSound, switchImg.bind(null, false));
 }
 
 /*
-* Triggered by user action on click. 
+* Triggered by user action on click.
 * Handles switching the title image and playing the IP.
 */
 const onButtonClick = ()=> {
     // Is sound already playing? If so, get out of here!
     if (curSound != null && !curSound.ended) return;
-    
+
     // Change title image to playing state.
     switchImg(true);
-    
+
     // Play the IP and change title image to default state on complete.
     playIP(START_POINT, switchImg.bind(null, false));
 }
