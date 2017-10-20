@@ -110,7 +110,9 @@ const playIP = (i, onend)=> {
 * Switches the two title images.
 */
 const switchImg = (playing)=> {
-    document.getElementById(imgElement).src = (playing) ? img2 : img1;
+    let currentImage = document.getElementById(imgElement);
+    currentImage.src = (playing) ? img2 : img1;
+    (playing) ? currentImage.classList.add('animate') : currentImage.classList.remove('animate');
 }
 
 /*
