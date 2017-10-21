@@ -39,6 +39,10 @@
       ga('send', 'pageview');
 
     </script>
+
+    <!-- Dummy ads.js file to detect ad blocker -->
+    <script src="/js/ads.js"></script>
+
 </head>
 
 <body>
@@ -68,9 +72,25 @@
 
             <!-- ip display -->
             <h1><font size="6">Your IP is:</font> <script type="text/javascript">document.write(ip);</script></h1>
+           
+	    <!-- logic to detect if an ad blocker is in use, and thus notify the user since it breaks functionality --> 
+            <script>
+	        //if( window.canRunAds === undefined ){
+		    //document.getElementById("ipDisplay").textContent = "It looks like you're using an ad blocker - that might break stuff.";  
+		    //}
+
+            setTimeout(function(){
+                if( window.canRunAds === undefined ){
+                    document.getElementById("ipDisplay").textContent = "It looks like you're using an ad blocker - that might break stuff.";
+                }
+            }, 500);
+            </script> 
 
             <!-- audio element -->
             <audio id="playitagain"></audio>
+
+            <!-- ad blocker warning -->
+            <p id="ipDisplay"></p>
 
             <!-- some info -->
             <p class="lead">Just click the button below to hear your IP address in the most dumb way possible. I promise, it will be stupid...</p>

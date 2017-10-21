@@ -88,3 +88,8 @@ body {
     border-bottom: 0;
   }
 }
+
+/* Making the ad block warning red*/
+#ipDisplay {
+    color: red;
+}
