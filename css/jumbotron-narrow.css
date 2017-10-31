@@ -61,7 +61,7 @@ body {
 }
 
 .awesome_img.animate {
-  animation: swing 2s infinite ease-in-out;
+  animation: swing 2s infinite linear;
 }
 
 @keyframes swing {
