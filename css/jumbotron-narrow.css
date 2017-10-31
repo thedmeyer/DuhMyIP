@@ -69,6 +69,7 @@ body {
   20% {transform:rotate(0deg);}
   50% { transform: rotate(30deg); }
   80% {transform:rotate(0deg);}
+  width: 50%;
 }
 
 .fb-like {
