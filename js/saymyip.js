@@ -29,7 +29,7 @@ const titleSound      = "sounds/duh.mp3";
 const dir             = "sounds/";        // The directory of all the audio clips.
 const ext             = ".mp3";
 const takes           = 3;                // There are 3 takes for each audio clip.
-
+const rocking         = true;             // Enable or Disable the rocking animation
 // Instance Vars
 let ip          = "";
 let sounds      = new Array();
@@ -112,7 +112,7 @@ const playIP = (i, onend)=> {
 const switchImg = (playing)=> {
     let currentImage = document.getElementById(imgElement);
     currentImage.src = (playing) ? img2 : img1;
-    (playing) ? currentImage.classList.add('animate') : currentImage.classList.remove('animate');
+    (playing && rocking) ? currentImage.classList.add('animate') : currentImage.classList.remove('animate');
 }
 
 /*
