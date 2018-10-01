@@ -2,6 +2,7 @@
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+  font-family: 'Dosis'!important;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -46,15 +47,21 @@ body {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
   padding: 1px;
+  font-family: Dosis!important;
 }
 .jumbotron .btn {
-  padding: 14px 24px;
+  padding: 4px 24px;
   font-size: 21px;
+  font-weight: 700;
+}
+.jumbotron h1{
+  font-family: Dosis!important;
 }
 
 .awesome_img {
   cursor: pointer;
   width: 50%;
+  opacity: 0.8;
 }
 
 .fb-like {
@@ -86,4 +93,8 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.twitter-share-button{
+  margin: 8px;
 }
