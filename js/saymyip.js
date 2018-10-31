@@ -76,6 +76,7 @@ const playAudio = (src, onend)=> {
     audio.src = src;
     audio.play();
     audio.onended = ()=> {
+    	curSound = null;
         onend();
     };
 }
@@ -121,7 +122,7 @@ const switchImg = (playing)=> {
 */
 const playTitleSound = ()=> {
     // Is sound already playing? If so, get out of here!
-    if (curSound != null && !curSound.ended) return;
+    if (curSound != null) return;
 
     // Change title image to playing state.
     switchImg(true);
@@ -136,7 +137,7 @@ const playTitleSound = ()=> {
 */
 const onButtonClick = ()=> {
     // Is sound already playing? If so, get out of here!
-    if (curSound != null && !curSound.ended) return;
+    if (curSound != null) return;
 
     // Change title image to playing state.
     switchImg(true);
