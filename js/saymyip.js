@@ -29,7 +29,8 @@ const titleSound      = "sounds/duh.mp3";
 const dir             = "sounds/";        // The directory of all the audio clips.
 const ext             = ".mp3";
 const takes           = 3;                // There are 3 takes for each audio clip.
-const rocking         = true;             // Enable or Disable the rocking animation
+const rocking         = false;             // Enable or Disable the rocking animation
+
 // Instance Vars
 let ip          = "";
 let sounds      = new Array();
